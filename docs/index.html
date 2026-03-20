@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PETER CARVAJAL | Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+        }
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            line-height: 1.6; 
+            margin: 0 auto; 
+            max-width: 900px; 
+            padding: 40px 20px; 
+            color: var(--text-color);
+        }
+        header { 
+            border-bottom: 3px solid var(--secondary-color); 
+            padding-bottom: 20px; 
+            margin-bottom: 30px; 
+        }
+        h1 { color: var(--primary-color); letter-spacing: 1px; margin-bottom: 5px;}
+        h2 { color: var(--secondary-color); margin-top: 30px;}
+        .subtitle { font-size: 1.2em; color: #7f8c8d; margin-top: 0; }
+        .card { 
+            background: #f9f9f9; 
+            border-left: 4px solid var(--secondary-color); 
+            padding: 15px 20px; 
+            margin-bottom: 20px; 
+            border-radius: 0 5px 5px 0;
+        }
+        .tech-tag {
+            display: inline-block;
+            background: #e1f0fa;
+            color: var(--secondary-color);
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.85em;
+            margin-right: 5px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>PETER CARVAJAL</h1>
+        <p class="subtitle">Electronic and Telecommunications Engineering | Data Engineering</p>
+    </header>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <p>I specialize in designing robust data workflows, from debugging complex ETL pipelines to analyzing propagation research data. My focus bridges the gap between telecommunications infrastructure and advanced data science.</p>
+    </section>
+
+    <section id="experience">
+        <h2>Experience</h2>
+        <div class="card">
+            <h3>Data Engineering Intern | BAMBOOTEC</h3>
+            <p>Navigating large-scale repositories, managing Git workflows, and optimizing data pipelines for business intelligence applications.</p>
+        </div>
+        <div class="card">
+            <h3>Research Assistant | UPB Radiocommunications Laboratory</h3>
+            <p>Focused on propagation research, including orbital mechanics calculations for GEO and LEO satellite communications.</p>
+        </div>
+    </section>
+
+    <section id="projects">
+        <h2>Featured Projects</h2>
+        <div class="card">
+            <h3>Rain Attenuation Research (LACAP 2026)</h3>
+            <p>Developed a Python-based ETL pipeline to process, clean, and restructure historical pluviometer datasets (2008-2020) for 38 GHz terrestrial link analysis.</p>
+            <span class="tech-tag">Python</span><span class="tech-tag">Pandas</span><span class="tech-tag">Data Quality</span>
+        </div>
+        <div class="card">
+            <h3>Electrical Measurement Analysis</h3>
+            <p>Standardized and processed time-of-use billing blocks (2017-2024) for Bolivian distributors including CRE R.L. and EMDEECRUZ.</p>
+            <span class="tech-tag">SQL</span><span class="tech-tag">Power Query</span><span class="tech-tag">Data Engineering</span>
+        </div>
+        <div class="card">
+            <h3>E-commerce Database Modeling</h3>
+            <p>Designed logical database keys and performed exploratory analysis on the Olist Brazilian E-commerce dataset.</p>
+            <span class="tech-tag">SQL</span><span class="tech-tag">Power BI</span><span class="tech-tag">Data Modeling</span>
+        </div>
+    </section>
+</body>
+</html>
