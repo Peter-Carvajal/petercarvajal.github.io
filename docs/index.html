@@ -1,401 +1,393 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html class="light scroll-smooth" lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PETER CARVAJAL | Portfolio</title>
-    <!-- Google Fonts: Playfair Display + Lora -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <!-- Centralized Links -->
-    <script src="links-config.js"></script>
-
-    <script>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Peter Iber Carvajal Gutierrez | Electronics & Telecommunications Engineer</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
         tailwind.config = {
+            darkMode: "class",
             theme: {
                 extend: {
-                    fontFamily: {
-                        display: ['"Playfair Display"', 'Georgia', 'serif'],
-                        body:    ['"Lora"', 'Georgia', 'serif'],
-                    },
                     colors: {
-                        ink:    '#1a1208',
-                        muted:  '#6b6254',
-                        rule:   '#ddd8d0',
-                        cream:  '#faf8f5',
-                        paper:  '#f3f0eb',
-                        accent: '#2c5f8a',
-                        'accent-dark': '#1e4468',
+                        "primary": "#5D4037",
+                        "on-primary": "#FAF6F5",
+                        "background": "#FAF6F5",
+                        "on-surface": "#442A22",
+                        "surface": "#F4F4EF",
+                        "surface-container": "#EBEBE4",
+                        "surface-container-high": "#E2E2D8",
+                        "surface-container-highest": "#D9D9CC",
+                        "outline": "#D4C3BE",
+                        "secondary": "#7D6B65",
+                        "on-surface-variant": "#5D4037",
+                        "primary-container": "#D4C3BE",
+                        "on-primary-container": "#442A22"
+                    },
+                    fontFamily: {
+                        "headline": ["Newsreader", "serif"],
+                        "body": ["Public Sans", "sans-serif"],
+                        "label": ["Public Sans", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.125rem",
+                        "sm": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "9999px"
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
                     }
-                }
-            }
+                },
+            },
         }
     </script>
     <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+        }
+        .editorial-grid {
+            display: grid;
+            grid-template-columns: repeat(12, minmax(0, 1fr));
+            gap: 1.5rem;
+        }
         body {
-            font-family: 'Lora', Georgia, serif;
-            background-color: #faf8f5;
-            color: #1a1208;
+            font-family: 'Public Sans', sans-serif;
         }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Playfair Display', Georgia, serif;
+        h1, h2, h3, .serif-brand {
+            font-family: 'Newsreader', serif;
+            letter-spacing: -0.02em;
         }
-
-        /* Thin rule divider */
-        .rule { border-color: #ddd8d0; }
-
-        /* Nav underline link style */
-        .nav-link {
-            position: relative;
-            padding-bottom: 2px;
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 0; height: 1px;
-            background: #2c5f8a;
-            transition: width 0.3s ease;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
-        .nav-link:hover::after { width: 100%; }
-
-        /* Card hover */
-        .skill-card {
-            border: 1px solid #ddd8d0;
-            transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
-        }
-        .skill-card:hover {
-            border-color: #2c5f8a;
-            box-shadow: 0 4px 24px rgba(44,95,138,0.07);
-            transform: translateY(-2px);
-        }
-
-        /* Timeline dot glow */
-        .dot-active { box-shadow: 0 0 0 4px #faf8f5, 0 0 10px rgba(44,95,138,0.4); }
-
-        /* Section fade-in on load */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .fade-up { animation: fadeUp 0.7s ease both; }
-        .delay-1 { animation-delay: 0.1s; }
-        .delay-2 { animation-delay: 0.2s; }
-        .delay-3 { animation-delay: 0.35s; }
-        .delay-4 { animation-delay: 0.5s; }
-
-        /* Project card */
-        .project-card {
-            border: 1px solid #ddd8d0;
-            transition: box-shadow 0.3s, transform 0.3s;
-        }
-        .project-card:hover {
-            box-shadow: 0 8px 32px rgba(44,95,138,0.09);
-            transform: translateY(-3px);
+        /* Nav Active State */
+        .nav-link.active {
+            font-weight: 700;
+            border-bottom: 2px solid;
         }
     </style>
 </head>
-<body>
+<body class="bg-background dark:bg-[#141211] text-on-surface dark:text-[#EBE5E0] transition-colors duration-500">
+<nav class="fixed top-0 w-full z-50 bg-[#FAF6F5]/80 dark:bg-[#141211]/80 backdrop-blur-md flex justify-between items-center px-8 py-6 max-w-none transition-colors duration-500 border-b border-transparent dark:border-[#4e6073]/10">
+    <div class="font-['Newsreader'] text-2xl font-semibold text-[#442A22] dark:text-[#EBE5E0] tracking-tighter serif-brand">
+        Peter Iber Carvajal Gutierrez
+    </div>
+    <div class="hidden md:flex items-center space-x-8 font-['Newsreader'] font-medium text-lg tracking-tight" id="nav-menu">
+        <a class="nav-link text-[#5D4037]/70 dark:text-[#9A918C] hover:text-[#442A22] dark:hover:text-[#EBE5E0] dark:border-[#4e6073] transition-all duration-300 pb-1" href="#home">Home</a>
+        <a class="nav-link text-[#5D4037]/70 dark:text-[#9A918C] hover:text-[#442A22] dark:hover:text-[#EBE5E0] dark:border-[#4e6073] transition-all duration-300 pb-1" href="#experience">Experience</a>
+        <a class="nav-link text-[#5D4037]/70 dark:text-[#9A918C] hover:text-[#442A22] dark:hover:text-[#EBE5E0] dark:border-[#4e6073] transition-all duration-300 pb-1" href="#projects">Projects</a>
+        <a class="nav-link text-[#5D4037]/70 dark:text-[#9A918C] hover:text-[#442A22] dark:hover:text-[#EBE5E0] dark:border-[#4e6073] transition-all duration-300 pb-1" href="#about">About</a>
+        <a class="nav-link text-[#5D4037]/70 dark:text-[#9A918C] hover:text-[#442A22] dark:hover:text-[#EBE5E0] dark:border-[#4e6073] transition-all duration-300 pb-1" href="#contact">Contact</a>
+    </div>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 bg-cream/90 backdrop-blur-sm border-b rule">
-        <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-            <a href="#" class="font-display text-lg font-bold tracking-tight text-ink">
-                Peter Carvajal<span class="text-accent">.</span>
-            </a>
-            <div class="hidden md:flex space-x-8 text-sm font-body text-muted">
-                <a href="#about"      class="nav-link hover:text-ink transition-colors">About</a>
-                <a href="#skills"     class="nav-link hover:text-ink transition-colors">Skills</a>
-                <a href="#experience" class="nav-link hover:text-ink transition-colors">Experience</a>
-                <a href="#projects"   class="nav-link hover:text-ink transition-colors">Projects</a>
-                <a href="#contact"    class="nav-link hover:text-ink transition-colors">Contact</a>
-            </div>
-            <a id="nav-cv" href="#"
-               class="border border-ink text-ink px-5 py-2 text-sm font-semibold hover:bg-ink hover:text-cream transition-all">
-                Download CV
-            </a>
-        </div>
-    </nav>
+    <div class="flex items-center gap-6">
+        <button id="theme-toggle" class="text-[#5D4037] dark:text-[#4e6073] hover:opacity-70 transition-opacity flex items-center">
+            <span class="material-symbols-outlined" id="theme-icon">dark_mode</span>
+        </button>
+        <a class="bg-[#5D4037] dark:bg-[#4e6073] text-[#FAF6F5] dark:text-white px-6 py-2 rounded-sm text-sm font-semibold tracking-wide hover:opacity-90 dark:hover:bg-[#3b4a59] active:scale-95 transition-all duration-200" href="assets/CV_Peter_Carvajal.pdf" download="CV_Peter_Carvajal.pdf">
+            Download CV
+        </a>
+    </div>
+</nav>
 
-    <main class="pt-36 pb-24">
-
-        <!-- ── Hero ── -->
-        <section id="hero" class="max-w-6xl mx-auto px-6 mb-32">
-            <div class="max-w-3xl fade-up">
-                <p class="text-sm uppercase tracking-widest text-muted font-body mb-6">Portfolio</p>
-                <h1 class="text-6xl md:text-8xl font-bold text-ink mb-6 leading-none">
-                    Peter<br><span class="text-accent">Carvajal</span>
-                </h1>
-                <p class="text-xl text-muted mb-10 font-body leading-relaxed italic">
-                    Electronic &amp; Telecommunications Engineering<br>
-                    <span class="not-italic font-medium text-ink/70">— Data Engineering</span>
-                </p>
-                <div class="flex space-x-3 fade-up delay-2">
-                    <a id="hero-linkedin" href="#" target="_blank"
-                       class="p-3 border rule bg-white hover:border-accent hover:text-accent transition-all text-muted">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i>
-                    </a>
-                    <a id="hero-github" href="#" target="_blank"
-                       class="p-3 border rule bg-white hover:border-accent hover:text-accent transition-all text-muted">
-                        <i data-lucide="github" class="w-5 h-5"></i>
-                    </a>
-                    <a id="hero-email" href="#"
-                       class="p-3 border rule bg-white hover:border-accent hover:text-accent transition-all text-muted">
-                        <i data-lucide="mail" class="w-5 h-5"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Decorative rule -->
-            <div class="mt-20 border-t rule max-w-xs"></div>
-        </section>
-
-        <!-- ── About ── -->
-        <section id="about" class="max-w-6xl mx-auto px-6 mb-32">
-            <div class="flex flex-col md:flex-row gap-16 items-start">
-                <div class="md:w-1/3">
-                    <p class="text-xs font-body uppercase tracking-widest text-accent mb-4">§ 01</p>
-                    <h2 class="font-display text-3xl font-bold text-ink leading-tight">Bridging Infra<br>&amp; Analytics</h2>
-                </div>
-                <div class="md:w-2/3 border-l rule pl-12">
-                    <p class="text-lg text-muted font-body leading-relaxed">
-                        I specialize in designing robust data workflows, from debugging complex ETL pipelines
-                        to analyzing propagation research data. My focus bridges the gap between
-                        telecommunications infrastructure and advanced data science.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── Skills ── -->
-        <section id="skills" class="max-w-6xl mx-auto px-6 mb-32">
-            <div class="flex items-baseline gap-6 mb-14">
-                <p class="text-xs font-body uppercase tracking-widest text-accent">§ 02</p>
-                <h2 class="font-display text-3xl font-bold text-ink">Technical Skills</h2>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-
-                <!-- Data Engineering -->
-                <div class="skill-card p-8 bg-white group">
-                    <div class="w-10 h-10 border border-accent/30 flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-all">
-                        <i data-lucide="database" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-ink mb-5">Data Engineering</h3>
-                    <ul class="space-y-3 font-body text-muted text-sm">
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> Python (Pandas, ETL)</li>
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> SQL (PostgreSQL, MSSQL)</li>
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> Data Modeling</li>
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> BI Visualization</li>
-                    </ul>
-                </div>
-
-                <!-- Telecommunications -->
-                <div class="skill-card p-8 bg-white group">
-                    <div class="w-10 h-10 border border-accent/30 flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-all">
-                        <i data-lucide="radio" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-ink mb-5">Telecommunications</h3>
-                    <ul class="space-y-3 font-body text-muted text-sm">
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> Propagation Research</li>
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> Satellite Link Budget</li>
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> RF Planning</li>
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> Signal Analysis</li>
-                    </ul>
-                </div>
-
-                <!-- Tools -->
-                <div class="skill-card p-8 bg-white group">
-                    <div class="w-10 h-10 border border-accent/30 flex items-center justify-center text-accent mb-6 group-hover:bg-accent group-hover:text-white transition-all">
-                        <i data-lucide="terminal" class="w-5 h-5"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-ink mb-5">Tools &amp; Cloud</h3>
-                    <ul class="space-y-3 font-body text-muted text-sm">
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> Git &amp; CI/CD Pipelines</li>
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> Docker (Basic)</li>
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> Azure Fundamentals</li>
-                        <li class="flex items-center gap-3"><span class="w-4 text-accent text-lg leading-none">—</span> Excel (Advanced/VBA)</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <!-- ── Experience ── -->
-        <section id="experience" class="max-w-6xl mx-auto px-6 mb-32">
-            <div class="flex items-baseline gap-6 mb-14">
-                <p class="text-xs font-body uppercase tracking-widest text-accent">§ 03</p>
-                <h2 class="font-display text-3xl font-bold text-ink">Experience</h2>
-            </div>
-            <div class="space-y-14">
-
-                <div class="relative pl-10 border-l rule">
-                    <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-accent dot-active"></div>
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-                        <h3 class="font-display text-xl font-bold text-ink">Data Engineering Intern</h3>
-                        <span class="font-body text-sm text-muted italic mt-1 md:mt-0">BAMBOOTEC</span>
-                    </div>
-                    <p class="font-body text-muted leading-relaxed max-w-2xl">
-                        Navigating large-scale repositories, managing Git workflows, and optimizing data pipelines for business intelligence applications.
-                    </p>
-                </div>
-
-                <div class="relative pl-10 border-l rule">
-                    <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 rounded-full bg-rule border border-muted/30"></div>
-                    <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
-                        <h3 class="font-display text-xl font-bold text-ink">Research Assistant</h3>
-                        <span class="font-body text-sm text-muted italic mt-1 md:mt-0">UPB Radiocommunications Lab</span>
-                    </div>
-                    <p class="font-body text-muted leading-relaxed max-w-2xl">
-                        Focused on propagation research, including orbital mechanics calculations for GEO and LEO satellite communications.
-                    </p>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- ── Projects ── -->
-        <section id="projects" class="max-w-6xl mx-auto px-6 mb-32">
-            <div class="flex justify-between items-end mb-14">
-                <div>
-                    <p class="text-xs font-body uppercase tracking-widest text-accent mb-3">§ 04</p>
-                    <h2 class="font-display text-3xl font-bold text-ink">Featured Projects</h2>
-                </div>
-                <a id="projects-github" href="#" target="_blank"
-                   class="hidden md:flex items-center gap-2 font-body text-sm text-muted hover:text-accent transition-colors">
-                    View GitHub <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+<main class="pt-20">
+<section class="relative min-h-[80vh] flex items-center px-6 md:px-12 py-24 overflow-hidden bg-[#FAF6F5] dark:bg-[#141211] transition-colors duration-500 animate-fade-in-up" id="home">
+    <div class="max-w-[1440px] mx-auto w-full editorial-grid">
+        <div class="col-span-12 md:col-span-8 z-10">
+            <span class="inline-block text-xs font-bold tracking-[0.2em] text-[#5D4037] dark:text-[#4e6073] uppercase mb-6 bg-[#D4C3BE]/30 dark:bg-[#4e6073]/15 px-3 py-1 rounded-sm font-body border border-transparent dark:border-[#4e6073]/20">
+                PROFESSIONAL PORTFOLIO
+            </span>
+            <h1 class="text-6xl md:text-9xl leading-[0.95] mb-8 text-[#442A22] dark:text-[#EBE5E0]">
+                Peter Iber <br/>
+                <span class="italic text-[#5D4037] dark:text-[#4e6073]">Carvajal Gutierrez</span>
+            </h1>
+            <p class="text-xl md:text-2xl font-light text-[#7D6B65] dark:text-[#9A918C] max-w-xl leading-relaxed mb-12 font-body">
+                Electronics & Telecommunications Engineer specialized in transforming complex data into actionable technical insights. 
+            </p>
+            <div class="flex flex-wrap gap-6">
+                <a class="flex items-center gap-2 group text-[#5D4037] dark:text-[#EBE5E0] font-semibold border-b-2 border-transparent hover:border-[#5D4037] dark:hover:border-[#4e6073] transition-all py-1 font-body" href="#projects">
+                    Explore Technical Projects
+                    <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform dark:text-[#4e6073]">arrow_forward</span>
                 </a>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-
-                <!-- Project 1 -->
-                <div class="project-card bg-white overflow-hidden group">
-                    <div class="aspect-video bg-paper flex items-center justify-center border-b rule relative overflow-hidden">
-                        <div class="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors"></div>
-                        <i data-lucide="cloud-rain" class="w-14 h-14 text-accent/25 group-hover:scale-110 transition-transform"></i>
-                    </div>
-                    <div class="p-7">
-                        <h4 class="font-display text-lg font-bold text-ink mb-2">Rain Attenuation Research</h4>
-                        <p class="font-body text-muted text-sm mb-5 leading-relaxed">
-                            Developed a Python ETL pipeline to process and restructure historical pluviometer datasets (2008–2020) for LACAP 2026.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-5">
-                            <span class="px-2.5 py-1 border rule font-body text-xs text-muted">Python</span>
-                            <span class="px-2.5 py-1 border rule font-body text-xs text-muted">Pandas</span>
-                            <span class="px-2.5 py-1 border rule font-body text-xs text-muted">Data Engineering</span>
-                        </div>
-                        <a href="#" class="flex items-center gap-1.5 font-body text-sm font-semibold text-accent hover:text-accent-dark transition-colors">
-                            Case Study <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 2 -->
-                <div class="project-card bg-white overflow-hidden group">
-                    <div class="aspect-video bg-paper flex items-center justify-center border-b rule relative overflow-hidden">
-                        <div class="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors"></div>
-                        <i data-lucide="zap" class="w-14 h-14 text-accent/25 group-hover:scale-110 transition-transform"></i>
-                    </div>
-                    <div class="p-7">
-                        <h4 class="font-display text-lg font-bold text-ink mb-2">Electrical Measurement Analysis</h4>
-                        <p class="font-body text-muted text-sm mb-5 leading-relaxed">
-                            Standardized and processed time-of-use billing blocks (2017–2024) for Bolivian distributors like CRE R.L.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-5">
-                            <span class="px-2.5 py-1 border rule font-body text-xs text-muted">SQL</span>
-                            <span class="px-2.5 py-1 border rule font-body text-xs text-muted">Power Query</span>
-                            <span class="px-2.5 py-1 border rule font-body text-xs text-muted">Data Pipeline</span>
-                        </div>
-                        <a href="#" class="flex items-center gap-1.5 font-body text-sm font-semibold text-accent hover:text-accent-dark transition-colors">
-                            View Report <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Project 3 -->
-                <div class="project-card bg-white overflow-hidden group">
-                    <div class="aspect-video bg-paper flex items-center justify-center border-b rule relative overflow-hidden">
-                        <div class="absolute inset-0 bg-accent/0 group-hover:bg-accent/5 transition-colors"></div>
-                        <i data-lucide="shopping-cart" class="w-14 h-14 text-accent/25 group-hover:scale-110 transition-transform"></i>
-                    </div>
-                    <div class="p-7">
-                        <h4 class="font-display text-lg font-bold text-ink mb-2">E-commerce Database Modeling</h4>
-                        <p class="font-body text-muted text-sm mb-5 leading-relaxed">
-                            Designed logical database keys and performed exploratory analysis on the Olist Brazilian E-commerce dataset.
-                        </p>
-                        <div class="flex flex-wrap gap-2 mb-5">
-                            <span class="px-2.5 py-1 border rule font-body text-xs text-muted">SQL</span>
-                            <span class="px-2.5 py-1 border rule font-body text-xs text-muted">Power BI</span>
-                            <span class="px-2.5 py-1 border rule font-body text-xs text-muted">Modeling</span>
-                        </div>
-                        <a href="#" class="flex items-center gap-1.5 font-body text-sm font-semibold text-accent hover:text-accent-dark transition-colors">
-                            View Dashboard <i data-lucide="arrow-right" class="w-4 h-4"></i>
-                        </a>
-                    </div>
-                </div>
-
+        </div>
+        <div class="col-span-12 md:col-span-4 relative mt-12 md:mt-0 flex justify-center items-center">
+            <div class="w-full aspect-[4/4] bg-[#E2E2D8] dark:bg-[#1C1A19] relative overflow-hidden rounded-sm">
+                <img alt="Peter Iber Carvajal Gutierrez Professional Portrait" class="w-full h-full object-cover opacity-90 hover:opacity-100 transition-opacity duration-700 mix-blend-normal dark:mix-blend-normal" src="assets/FotoPeter.png"/>
+                <div class="absolute inset-0 bg-[#5D4037]/5 dark:bg-[#4e6073]/10 mix-blend-multiply dark:mix-blend-overlay pointer-events-none"></div>
             </div>
-        </section>
-
-        <!-- ── Contact ── -->
-        <section id="contact" class="max-w-6xl mx-auto px-6 mb-16">
-            <div class="border rule bg-white p-16 md:p-24 text-center relative overflow-hidden">
-                <!-- Decorative corner marks -->
-                <span class="absolute top-5 left-5 text-rule text-3xl font-display leading-none">✦</span>
-                <span class="absolute bottom-5 right-5 text-rule text-3xl font-display leading-none">✦</span>
-
-                <p class="text-xs font-body uppercase tracking-widest text-accent mb-5">§ 05 — Get in Touch</p>
-                <h2 class="font-display text-3xl md:text-5xl font-bold text-ink mb-10 max-w-xl mx-auto leading-tight">
-                    Let's build something data-driven together.
-                </h2>
-                <div class="flex flex-col md:flex-row gap-4 justify-center">
-                    <a id="contact-email" href="#"
-                       class="bg-ink text-cream px-8 py-4 font-body font-semibold hover:bg-accent transition-all flex items-center justify-center gap-2">
-                        <i data-lucide="mail" class="w-5 h-5"></i>
-                        <span id="contact-email-display"></span>
-                    </a>
-                    <a id="contact-linkedin" href="#" target="_blank"
-                       class="border border-ink text-ink px-8 py-4 font-body font-semibold hover:bg-ink hover:text-cream transition-all flex items-center justify-center gap-2">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i> LinkedIn
-                    </a>
-                </div>
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t rule py-10 px-6">
-        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-            <p class="font-body text-sm text-muted">
-                &copy; 2026 Peter Carvajal.
-            </p>
-            <div class="flex space-x-8 font-body text-sm text-muted">
-                <a href="#" class="hover:text-ink transition-colors">Back to top ↑</a>
-                <a id="footer-github"   href="#" target="_blank" class="hover:text-ink transition-colors">GitHub</a>
-                <a id="footer-linkedin" href="#" target="_blank" class="hover:text-ink transition-colors">LinkedIn</a>
+            <div class="absolute -right-12 -top-12 w-64 h-64 opacity-[0.03] dark:opacity-[0.02] pointer-events-none dark:text-white">
+                <span class="material-symbols-outlined text-[180px]">settings_input_component</span>
             </div>
         </div>
-    </footer>
+    </div>
+</section>
 
-    <script>
-        lucide.createIcons();
+<section class="py-32 px-6 md:px-12 bg-[#F4F4EF] dark:bg-[#1C1A19] transition-colors duration-500 reveal" id="experience">
+    <div class="max-w-[1440px] mx-auto editorial-grid">
+        <div class="col-span-12 md:col-span-4">
+            <h2 class="text-5xl md:text-6xl sticky top-32 text-[#442A22] dark:text-[#EBE5E0]">Professional <br/><span class="italic text-[#5D4037] dark:text-[#4e6073]">Trajectory</span></h2>
+        </div>
+        <div class="col-span-12 md:col-span-8 space-y-20 mt-12 md:mt-0">
+            <div class="flex flex-col md:flex-row gap-8 md:gap-16 border-l-2 border-[#D4C3BE] dark:border-[#4e6073]/30 pl-8 relative">
+                <div class="absolute w-4 h-4 bg-[#5D4037] dark:bg-[#4e6073] -left-[9px] top-0 rounded-sm"></div>
+                <div class="min-w-[160px]">
+                    <span class="font-bold text-[#5D4037] dark:text-[#8ca3b9] font-body tracking-wider uppercase text-sm">2022 — PRESENT</span>
+                </div>
+                <div>
+                    <h3 class="text-3xl mb-2 text-[#442A22] dark:text-[#EBE5E0]">Senior Telecommunications Systems Designer</h3>
+                    <p class="text-[#5D4037] dark:text-[#4e6073] font-semibold mb-6 italic">Tech-Optics Infrastructure Group</p>
+                    <p class="text-[#7D6B65] dark:text-[#9A918C] leading-relaxed font-body text-lg">Lead engineer for regional fiber-to-the-home (FTTH) expansion projects. Managed technical compliance for cross-border wireless data relay stations.</p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row gap-8 md:gap-16 border-l-2 border-[#D4C3BE] dark:border-[#4e6073]/30 pl-8 relative">
+                <div class="absolute w-4 h-4 bg-[#D4C3BE] dark:bg-[#252221] border border-transparent dark:border-[#4e6073]/50 -left-[9px] top-0 rounded-sm"></div>
+                <div class="min-w-[160px]">
+                    <span class="font-bold text-[#5D4037]/60 dark:text-[#8ca3b9]/60 font-body tracking-wider uppercase text-sm">2020 — 2022</span>
+                </div>
+                <div>
+                    <h3 class="text-3xl mb-2 text-[#442A22] dark:text-[#EBE5E0]">Electronics Design Associate</h3>
+                    <p class="text-[#5D4037] dark:text-[#4e6073] font-semibold mb-6 italic">NovaCore Embedded Systems</p>
+                    <p class="text-[#7D6B65] dark:text-[#9A918C] leading-relaxed font-body text-lg">Collaborated on the hardware lifecycle of industrial IoT sensors. Implemented rigorous EMI/EMC testing protocols for medical-grade electronics.</p>
+                </div>
+            </div>
+            <div class="flex flex-col md:flex-row gap-8 md:gap-16 border-l-2 border-[#D4C3BE] dark:border-[#4e6073]/30 pl-8 relative">
+                <div class="absolute w-4 h-4 bg-[#D4C3BE] dark:bg-[#252221] border border-transparent dark:border-[#4e6073]/50 -left-[9px] top-0 rounded-sm"></div>
+                <div class="min-w-[160px]">
+                    <span class="font-bold text-[#5D4037]/60 dark:text-[#8ca3b9]/60 font-body tracking-wider uppercase text-sm">2018 — 2020</span>
+                </div>
+                <div>
+                    <h3 class="text-3xl mb-2 text-[#442A22] dark:text-[#EBE5E0]">Systems Engineering Intern</h3>
+                    <p class="text-[#5D4037] dark:text-[#4e6073] font-semibold mb-6 italic">Global Network Solutions</p>
+                    <p class="text-[#7D6B65] dark:text-[#9A918C] leading-relaxed font-body text-lg">Assisted in the configuration of enterprise-scale Cisco routing environments and basic signal monitoring for cellular base stations.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
-        // ── Inject links from centralized config ──
-        document.getElementById('nav-cv').href            = LINKS.cv;
-        document.getElementById('hero-linkedin').href     = LINKS.linkedin;
-        document.getElementById('hero-github').href       = LINKS.github;
-        document.getElementById('hero-email').href        = LINKS.email;
-        document.getElementById('projects-github').href   = LINKS.github;
-        document.getElementById('contact-email').href     = LINKS.email;
-        document.getElementById('contact-email-display').textContent = LINKS.emailDisplay;
-        document.getElementById('contact-linkedin').href  = LINKS.linkedin;
-        document.getElementById('footer-github').href     = LINKS.github;
-        document.getElementById('footer-linkedin').href   = LINKS.linkedin;
-    </script>
+<section class="py-32 px-6 md:px-12 bg-[#FAF6F5] dark:bg-[#141211] transition-colors duration-500 reveal" id="projects">
+    <div class="max-w-[1440px] mx-auto">
+        <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-8">
+            <div class="max-w-2xl">
+                <h2 class="text-5xl md:text-6xl mb-6 text-[#442A22] dark:text-[#EBE5E0]">Selected <span class="italic">Technical Works</span></h2>
+                <p class="text-[#7D6B65] dark:text-[#9A918C] font-body text-lg leading-relaxed">A portfolio of projects ranging from theoretical telecommunications models to physical hardware prototypes.</p>
+            </div>
+            <div class="hidden md:block">
+                <span class="text-8xl font-headline italic text-[#442A22] dark:text-white opacity-5 dark:opacity-[0.03] select-none">2021-2024</span>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-24">
+            <div class="group p-6 -m-6 rounded-sm hover:bg-transparent dark:hover:bg-[#1C1A19] transition-colors duration-500">
+                <div class="relative w-full aspect-[16/10] bg-[#EBEBE4] dark:bg-[#252221] rounded-sm overflow-hidden mb-8 transition-all duration-500">
+                    <img alt="Satellite Data Visualization" class="w-full h-full object-cover grayscale brightness-90 transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0 dark:opacity-80 dark:group-hover:opacity-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBukvOcqcBb0xvGGW1mrNflva4R_6qeytJDEMlHcmqeY5Q5P867p2EpCk7KcS-V7EydrViQ0TA1D4NavybcuIPLrqjHuuiMIu8gd-zFmaGVNV1wfsVs_v0fd0lBJxWaDIf-KgMX5LE3qizgEdXSJxsVe7ZrGb-NjQ-89Egu8pWGB4fw8fuKBZowuJ_9wssgKbIv5PBCdfKQF8rTCKe959MUw3U87juEM6tO2yxkM9Ty0ih8yMV2-LZYvsuWYFHjc7rlHSx7zKQl_Xg"/>
+                    <div class="absolute inset-0 bg-[#5D4037]/30 dark:bg-[#141211]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-[#FAF6F5] dark:bg-[#4e6073] text-[#5D4037] dark:text-white px-8 py-3 rounded-sm font-bold tracking-wide font-body">VIEW TECHNICAL CASE</span>
+                    </div>
+                </div>
+                <span class="text-[0.6875rem] font-bold tracking-[0.2em] text-[#5D4037] dark:text-[#8ca3b9] uppercase font-body">TELECOMMUNICATIONS</span>
+                <h3 class="text-3xl mt-4 mb-4 text-[#442A22] dark:text-[#EBE5E0]">Next-Gen Satellite Link Optimization</h3>
+                <p class="text-[#7D6B65] dark:text-[#9A918C] leading-relaxed font-body">Developing an adaptive modulation framework for LEO satellite constellations to mitigate atmospheric attenuation in C-band transmissions.</p>
+            </div>
+            <div class="group mt-0 md:mt-24 p-6 -m-6 rounded-sm hover:bg-transparent dark:hover:bg-[#1C1A19] transition-colors duration-500">
+                <div class="relative w-full aspect-[16/10] bg-[#EBEBE4] dark:bg-[#252221] rounded-sm overflow-hidden mb-8 transition-all duration-500">
+                    <img alt="FPGA Lab Work" class="w-full h-full object-cover grayscale brightness-90 transition-transform duration-1000 group-hover:scale-105 group-hover:grayscale-0 dark:opacity-80 dark:group-hover:opacity-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgmDMg7n2tMf_x2sOzrJfj9dfYyFb6qvwSYcdOFxcSescRjvSdDShiSCKq__ouLzPpLNkqDfyBHyhBt2PtR7iA6nGiGFNwWK5eAOUg57fD8NRrQwUN1dOVndLgaKE0LnXT-WFroSbk6Eq8JKwjA9BXFwV2UkyKCXp-xfaDpHLzBfd9DQ7casZ_pNrWZkCgy-Rvq-5iOHWAE21VXlkAE-wPvFJiiPeNtlpqJzNnBAvsk-1V7D9IfuPDV0AK2CXiiuiU_lJLWymCP_g"/>
+                    <div class="absolute inset-0 bg-[#5D4037]/30 dark:bg-[#141211]/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <span class="bg-[#FAF6F5] dark:bg-[#4e6073] text-[#5D4037] dark:text-white px-8 py-3 rounded-sm font-bold tracking-wide font-body">VIEW SCHEMATIC</span>
+                    </div>
+                </div>
+                <span class="text-[0.6875rem] font-bold tracking-[0.2em] text-[#5D4037] dark:text-[#8ca3b9] uppercase font-body">EMBEDDED SYSTEMS</span>
+                <h3 class="text-3xl mt-4 mb-4 text-[#442A22] dark:text-[#EBE5E0]">Real-Time FPGA Audio Engine</h3>
+                <p class="text-[#7D6B65] dark:text-[#9A918C] leading-relaxed font-body">Synthesis of a custom hardware processor for ultra-low latency audio filtering and spatialization using Verilog and Spartan-7 hardware.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="bg-[#F4F4EF] dark:bg-[#1C1A19] py-32 px-6 md:px-12 transition-colors duration-500 reveal" id="about">
+    <div class="max-w-[1440px] mx-auto">
+        <div class="mb-20 border-l-4 border-[#5D4037] dark:border-[#4e6073] pl-8">
+            <h2 class="text-4xl md:text-5xl mb-4 text-[#442A22] dark:text-[#EBE5E0]">The Technical <span class="italic">Atelier</span></h2>
+            <p class="text-[#7D6B65] dark:text-[#9A918C] font-body max-w-2xl text-lg">Bridging the gap between theoretical physics and industrial implementation through precise engineering craftsmanship.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+            <div class="md:col-span-2 bg-[#FAF6F5] dark:bg-[#252221] p-12 rounded-sm border border-[#D4C3BE]/30 dark:border-[#4e6073]/15 flex flex-col justify-between transition-colors duration-300">
+                <div>
+                    <span class="material-symbols-outlined text-[#5D4037] dark:text-[#4e6073] text-4xl mb-6">router</span>
+                    <h3 class="text-2xl mb-4 text-[#442A22] dark:text-[#EBE5E0]">Telecommunications Infrastructure</h3>
+                    <p class="text-[#7D6B65] dark:text-[#9A918C] leading-relaxed font-body">Design and optimization of high-speed network topologies, including microwave backhaul systems and fiber optic distribution.</p>
+                </div>
+                <div class="mt-10 flex flex-wrap gap-2">
+                    <span class="bg-[#F4F4EF] dark:bg-[#1D2630] text-[#5D4037] dark:text-[#8ca3b9] text-[0.6875rem] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-transparent dark:border-[#4e6073]/20">5G NR</span>
+                    <span class="bg-[#F4F4EF] dark:bg-[#1D2630] text-[#5D4037] dark:text-[#8ca3b9] text-[0.6875rem] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-transparent dark:border-[#4e6073]/20">OSPF/BGP</span>
+                    <span class="bg-[#F4F4EF] dark:bg-[#1D2630] text-[#5D4037] dark:text-[#8ca3b9] text-[0.6875rem] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full border border-transparent dark:border-[#4e6073]/20">RF Design</span>
+                </div>
+            </div>
+            <div class="md:col-span-1 bg-[#EBEBE4] dark:bg-[#252221] p-12 rounded-sm border border-transparent dark:border-[#4e6073]/15 flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-[#5D4037] dark:text-[#4e6073] text-4xl mb-6">analytics</span>
+                    <h3 class="text-xl mb-4 text-[#442A22] dark:text-[#EBE5E0]">Digital Signal Processing</h3>
+                </div>
+                <p class="text-sm text-[#5D4037] dark:text-[#9A918C] leading-relaxed font-body">Developing real-time algorithms for noise reduction, spectral analysis, and modulation schemes.</p>
+            </div>
+            <div class="md:col-span-1 bg-[#5D4037] dark:bg-[#4e6073] text-[#FAF6F5] dark:text-white p-12 rounded-sm flex flex-col justify-between">
+                <div>
+                    <span class="material-symbols-outlined text-[#FAF6F5]/80 text-4xl mb-6">memory</span>
+                    <h3 class="text-xl mb-4">Embedded Hardware</h3>
+                </div>
+                <p class="text-sm opacity-80 leading-relaxed font-body">Firmware development for ARM-based microcontrollers and FPGA-driven high-speed data acquisition units.</p>
+            </div>
+            <div class="md:col-span-1 bg-white dark:bg-[#252221] p-10 rounded-sm border border-[#D4C3BE]/20 dark:border-[#4e6073]/15">
+                <h4 class="text-xs font-bold tracking-widest text-[#5D4037] dark:text-[#8ca3b9] uppercase mb-8 font-body">Simulation Tools</h4>
+                <ul class="space-y-4 text-sm font-medium font-body text-[#442A22] dark:text-[#EBE5E0]">
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-[#5D4037] dark:bg-[#4e6073] rounded-sm"></span> MATLAB & Simulink</li>
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-[#5D4037] dark:bg-[#4e6073] rounded-sm"></span> LTspice Analysis</li>
+                    <li class="flex items-center gap-3"><span class="w-1.5 h-1.5 bg-[#5D4037] dark:bg-[#4e6073] rounded-sm"></span> HFSS Electromagnetics</li>
+                </ul>
+            </div>
+            <div class="md:col-span-3 bg-[#E2E2D8] dark:bg-[#252221] p-10 rounded-sm border border-transparent dark:border-[#4e6073]/15 relative overflow-hidden group">
+                <div class="flex flex-col md:flex-row gap-8 items-center">
+                    <div class="flex-1">
+                        <h4 class="text-2xl mb-4 text-[#442A22] dark:text-[#EBE5E0]">Academic Precision</h4>
+                        <p class="text-[#5D4037] dark:text-[#9A918C] font-body leading-relaxed">Combining rigorous academic research with hands-on technical execution. My approach focuses on scalability, reliability, and technical elegance in every circuit and code block.</p>
+                    </div>
+                    <div class="w-56 h-36 bg-[#D9D9CC] dark:bg-[#141211] rounded-sm flex items-center justify-center border border-[#D4C3BE]/40 dark:border-transparent overflow-hidden">
+                        <img alt="Circuit Board Detail" class="w-full h-full object-cover opacity-40 dark:opacity-20 grayscale group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBWfIGSKWku2vHPCgR2MQI3zzIOeg_2MPI0QJ3a2AxxHD0N20FgP1ieXiKIjKr-xiibMvJ_YorM4VCQHIVXBQKJakqwzVFgWJeyErd-x7sYvA5025IzoVGuCLp2g_RKdlAGMlBns4cU3x_vSGoMQxJcRKNNKLIRiAT1LSdwizX394rtYib7qzrTCDlHiC_9mF7ay_iN3NVD4L-wxs61N2QM1YhROdKR3rPWYqSxHZLYvnbIwD94n_xuPQyDYO-UoICsQFSE02vEULM"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-32 px-6 md:px-12 bg-white dark:bg-[#141211] transition-colors duration-500 reveal" id="contact">
+    <div class="max-w-[1440px] mx-auto text-center">
+        <h2 class="text-5xl md:text-7xl mb-12 text-[#442A22] dark:text-[#EBE5E0]">Start a <span class="italic">Technical Consultation</span></h2>
+        <p class="text-2xl md:text-3xl text-[#5D4037] dark:text-[#4e6073] font-headline italic mb-16 max-w-4xl mx-auto leading-relaxed">
+            "Relieving the web from lackluster design implementations, whilst ensuring top code quality."
+        </p>
+        <div class="flex flex-col items-center gap-12">
+            <div class="text-3xl md:text-4xl font-body font-semibold text-[#442A22] dark:text-[#EBE5E0] tracking-tight">
+                <a class="hover:text-[#5D4037] dark:hover:text-[#4e6073] transition-colors" href="tel:+59176114950">+591 76114950</a>
+            </div>
+            <div class="flex flex-wrap justify-center gap-8">
+                <a class="flex items-center gap-3 group" href="mailto:piber.engineer@protonmail.com">
+                    <div class="w-14 h-14 rounded-sm bg-[#F4F4EF] dark:bg-[#1C1A19] flex items-center justify-center text-[#5D4037] dark:text-[#4e6073] group-hover:bg-[#5D4037] dark:group-hover:bg-[#4e6073] group-hover:text-[#FAF6F5] dark:group-hover:text-white transition-all duration-300">
+                        <span class="material-symbols-outlined text-3xl">mail</span>
+                    </div>
+                    <span class="text-lg font-medium border-b border-transparent group-hover:border-[#5D4037] dark:group-hover:border-[#4e6073] transition-all font-body text-[#442A22] dark:text-[#EBE5E0]">Email</span>
+                </a>
+                <a class="flex items-center gap-3 group" href="https://www.linkedin.com/in/peter-iber-carvajal-gutierrez/">
+                    <div class="w-14 h-14 rounded-sm bg-[#F4F4EF] dark:bg-[#1C1A19] flex items-center justify-center text-[#5D4037] dark:text-[#4e6073] group-hover:bg-[#5D4037] dark:group-hover:bg-[#4e6073] group-hover:text-[#FAF6F5] dark:group-hover:text-white transition-all duration-300">
+                        <span class="material-symbols-outlined text-3xl">link</span>
+                    </div>
+                    <span class="text-lg font-medium border-b border-transparent group-hover:border-[#5D4037] dark:group-hover:border-[#4e6073] transition-all font-body text-[#442A22] dark:text-[#EBE5E0]">LinkedIn</span>
+                </a>
+                <a class="flex items-center gap-3 group" href="https://github.com/Peter-Carvajal">
+                    <div class="w-14 h-14 rounded-sm bg-[#F4F4EF] dark:bg-[#1C1A19] flex items-center justify-center text-[#5D4037] dark:text-[#4e6073] group-hover:bg-[#5D4037] dark:group-hover:bg-[#4e6073] group-hover:text-[#FAF6F5] dark:group-hover:text-white transition-all duration-300">
+                        <span class="material-symbols-outlined text-3xl">terminal</span>
+                    </div>
+                    <span class="text-lg font-medium border-b border-transparent group-hover:border-[#5D4037] dark:group-hover:border-[#4e6073] transition-all font-body text-[#442A22] dark:text-[#EBE5E0]">GitHub</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+<footer class="bg-[#FAF6F5] dark:bg-[#1C1A19] border-t border-[#D4C3BE]/20 dark:border-[#4e6073]/15 w-full py-16 px-8 transition-colors duration-500">
+    <div class="max-w-[1440px] mx-auto flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-8 md:mb-0 text-center md:text-left">
+            <div class="font-['Newsreader'] italic text-xl text-[#442A22] dark:text-[#EBE5E0] mb-2">
+                Peter Iber Carvajal Gutierrez
+            </div>
+            <p class="font-['Public_Sans'] text-xs tracking-wide uppercase text-[#5D4037]/60 dark:text-[#9A918C]">
+                © 2024 Peter Iber Carvajal Gutierrez. All rights reserved.
+            </p>
+        </div>
+        <div class="flex items-center space-x-12">
+            <a class="text-[#5D4037]/60 dark:text-[#9A918C] font-['Public_Sans'] text-sm tracking-wide uppercase hover:text-[#442A22] dark:hover:text-[#EBE5E0] underline decoration-[#D4C3BE] dark:decoration-[#4e6073]/50 underline-offset-4 transition-all duration-300" href="https://www.linkedin.com/in/peter-iber-carvajal-gutierrez/">LinkedIn</a>
+            <a class="text-[#5D4037]/60 dark:text-[#9A918C] font-['Public_Sans'] text-sm tracking-wide uppercase hover:text-[#442A22] dark:hover:text-[#EBE5E0] underline decoration-[#D4C3BE] dark:decoration-[#4e6073]/50 underline-offset-4 transition-all duration-300" href="https://github.com/Peter-Carvajal">GitHub</a>
+            <a class="text-[#5D4037]/60 dark:text-[#9A918C] font-['Public_Sans'] text-sm tracking-wide uppercase hover:text-[#442A22] dark:hover:text-[#EBE5E0] underline decoration-[#D4C3BE] dark:decoration-[#4e6073]/50 underline-offset-4 transition-all duration-300" href="mailto:petercarvajal1@upb.edu">Email</a>
+        </div>
+    </div>
+</footer>
+<script>
+    // Reveal on scroll logic
+    const observerOptions = {
+        threshold: 0.15
+    };
+
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Navigation active state indicator based on scroll
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            if (pageYOffset >= (sectionTop - 150)) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href').includes(current)) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // Default active for Home on load
+    window.addEventListener('DOMContentLoaded', () => {
+        if (!window.location.hash) {
+             document.querySelector('a[href="#home"]').classList.add('active');
+        }
+    });
+
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const htmlElement = document.documentElement;
+
+    themeToggle.addEventListener('click', () => {
+        htmlElement.classList.toggle('dark');
+        
+        if (htmlElement.classList.contains('dark')) {
+            themeIcon.textContent = 'light_mode';
+        } else {
+            themeIcon.textContent = 'dark_mode';
+        }
+    });
+</script>
 </body>
 </html>
